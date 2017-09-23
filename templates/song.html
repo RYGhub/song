@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>La Canzone Royal Games</title>
+    <style>
+        body {
+            background-color: #190c00;
+            color: #ff7f00;
+        }
+
+        .word {
+            display: inline;
+        }
+
+        form, form.inline input {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Continua la canzone Royal Games con una parola!
+    </h1>
+    <h3>
+        Puoi aggiungere una parola una volta al giorno.g
+    </h3>
+    <div>
+        ...
+        {% for word in last_words %}
+            <span class="word" id="last-word-{{ loop.index }}">{{ word[2] }}</span>
+        {% endfor %}
+        <form class="inline" method="POST">
+            <input name="word" {% if done %}disabled placeholder="Torna domani!"{% else %}placeholder="Continua tu!"{% endif %}>
+            <input type="submit" value="Aggiungi" {% if done %}disabled{% endif %}>
+        </form>
+    </div>
+</body>
+</html>
