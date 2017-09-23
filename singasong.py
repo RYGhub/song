@@ -26,8 +26,7 @@ def page_main():
         else:
             done = False
             session["last_entry"] = None
-        last_words = db.engine.execute("SELECT * FROM song ORDER BY time DESC LIMIT 3").fetchall()
-        last_words.reverse()
+        last_words = db.engine.execute("SELECT * FROM song ORDER BY time").fetchall()
         return render_template("song.html", last_words=last_words, done=done)
     elif request.method == "POST":
         if session.get("last_entry") and session["last_entry"] < dt.datetime.now() + dt.timedelta(1):
