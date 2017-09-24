@@ -26,6 +26,7 @@ def page_main():
         else:
             done = False
             session["last_entry"] = None
+            session.permanent = True
         last_words = db.engine.execute("SELECT * FROM song ORDER BY time").fetchall()
         return render_template("song.html", last_words=last_words, done=done)
     elif request.method == "POST":
@@ -35,6 +36,7 @@ def page_main():
         db.session.add(new_word)
         db.session.commit()
         session["last_entry"] = dt.datetime.now()
+        session.permanent = True
         return redirect(url_for("page_main"))
 
 
